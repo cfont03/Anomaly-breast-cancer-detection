@@ -117,7 +117,6 @@ def boundary_box_resize (df):
   
   
   
-from numpy.core.fromnumeric import shape
 
 # VGG Network
 def vgg16_cnn(df, h = 800, w = 800):
