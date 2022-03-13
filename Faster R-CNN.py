@@ -46,7 +46,8 @@ def resize (df, h = 800, w = 800):
   for i in df.iloc:
     img = cv2.imread(str(i[0]))
     img = cv2.resize(img, dsize = (h,w), interpolation = cv2.INTER_CUBIC)
-    new_path = Path("/content/archive/all-mias/{:}_resize{:}".format(i[0][-10:-4], '.jpeg')) # generate new path
+    path, filename = os.path.split(i[0])
+    new_path = Path(str(path)+'/{:}_resize{:}'.format(i[0][-10:-4], '.jpeg')) # generate new path
     status = cv2.imwrite(str(new_path), img)
     print("Image written to file-system " , new_path,  " :", status) # check if saved
     paths.append(new_path)
