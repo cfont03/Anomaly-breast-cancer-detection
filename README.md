@@ -7,6 +7,5 @@ This repository consists of the following file:
 
 And the following directories:
 * data cleansing: Preprocessing and cleansing of the data can be found here. 
-* train: 
-* test:
-* 
+* train: development of the algorithms Faster R-CNN and YOLO and training of the models
+* test: test of the models with test data
