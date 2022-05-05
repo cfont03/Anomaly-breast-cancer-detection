@@ -6,6 +6,6 @@ This repository consists of the following file:
 * Readme.md: Information on the contents of the repository is exposed.
 
 And the following directories:
-* data cleansing: Preprocessing and cleansing of the data can be found here. 
+* preprocess: preprocessing and cleansing of the raw data can be found here. 
 * train: development of the algorithms Faster R-CNN and YOLO and training of the models
 * test: test of the models with test data
