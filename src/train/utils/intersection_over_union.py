@@ -1,3 +1,7 @@
+import tensorflow as tf
+import numpy as np
+
+
 def IoU_faster_rcnn (df, threshold = 0.5):
     
     '''
@@ -202,3 +206,70 @@ def IoU_ROI (df, pos_threshold = 0.5, neg_threshold = 0.1):
     return df, idx_pos, idx_neg
 
 
+
+
+def IoU_yolo(box1, box2):
+
+  ''' 
+    
+  This function calculates the Intersection Over Union between two passed boxes.
+
+  Args:
+  box1: first box to compare with [c,x,y,w,h] c = 0:1, x = 1:2, y = 2:3, w = 3:4, h = 4:5 y_true
+  box2: second box to compare with [s, x,y,w,h] s = 0:1, x = 1:2, y = 2:3, w = 3:4, h = 4:5 y_pred
+  
+  Returns a value between 0 and 1
+
+  '''
+
+  # ------calculate coordinate of overlapping region------
+  
+  # calculate xmin, xmax, ymin and ymax
+  xmin_b1 = box1[..., 1:2] - (box1[..., 3:4])/2
+  ymin_b1 = box1[..., 2:3] - (box1[..., 4:5])/2
+  xmax_b1 = box1[..., 1:2] + (box1[..., 3:4])/2
+  ymax_b1 = box1[..., 2:3] + (box1[..., 4:5])/2
+
+  xmin_b2 = tf.cast(box2[..., 1:2], tf.float64) - (box2[..., 3:4])/2
+  ymin_b2 = tf.cast(box2[..., 2:3], tf.float64) - (box2[..., 4:5])/2
+  xmax_b2 = tf.cast(box2[..., 1:2], tf.float64) + (box2[..., 3:4])/2
+  ymax_b2 = tf.cast(box2[..., 2:3], tf.float64) + (box2[..., 4:5])/2
+  
+  
+  # take max of x1 and y1 out of both boxes
+  x1 = np.maximum(xmin_b1, xmin_b2)
+  y1 = np.maximum(ymin_b1, ymin_b2)
+  # take min of x2 and y2 out of both boxes
+  x2 = np.maximum(xmax_b1, xmax_b2)
+  y2 = np.maximum(ymax_b1, ymax_b2)
+
+  
+  # ------area of overlapping region------
+  if (x1[0] < x2[0] and y1[0] < y2[0]):
+    area_overlap = 0
+  else:
+    width_overlap = x2 - x1
+    height_overlap = y2 - y1
+    area_overlap = width_overlap * height_overlap
+  
+  
+
+  # ------computing union------
+  # sum of area of both the boxes - area_overlap
+            
+  # height and width of both boxes
+  width_b1 = box1[...,3:4]
+  height_b1 = box1[...,4:5]
+  width_b2 = box2[...,3:4]
+  height_b2 = box2[...,4:5]
+
+  area_b1 = tf.cast((width_b1 * height_b1), tf.float64)
+  area_b2 = tf.cast((width_b2 * height_b2), tf.float64)
+  
+  area_union_overlap = area_b1 + area_b2
+
+  area_union = area_union_overlap - area_overlap
+            
+  iou = area_overlap/(area_union + 1e-6)
+
+  return iou

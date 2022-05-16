@@ -1,6 +1,7 @@
 import time
-from tensorflow.keras import Sequential, Model
-from tensorflow import keras as K
+from tensorflow.keras import Model
+from tensorflow import keras
+import tensorflow.keras.backend as K
 print("Keras version   : ", keras.__version__)
 import tensorflow as tf
 from tensorflow.keras.layers import (Input, Conv2D)

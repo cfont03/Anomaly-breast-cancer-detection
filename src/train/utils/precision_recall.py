@@ -42,3 +42,47 @@ def compute_precision_recall(df, thresholds):
         recalls.append(np.round(recall, 3))
 
     return precisions, recalls
+
+
+def compute_precision_recall_yolo(ious, thresholds):
+
+    '''
+    This function calculates the precision_recall curve
+
+    '''
+
+    precisions = []
+    recalls = []
+
+    for threshold in thresholds:
+        
+        scores = np.zeros((498, 7 * 7, 1))
+
+        l1 = 0
+        for image in ious:
+          l2 = 0
+          for grid in image:
+            for iou in grid:
+              if threshold <= iou <= 1:
+                scores[l1, l2, :] = 2 # positive: FG
+              elif 0 < iou < threshold:
+                scores[l1, l2, :] = 1 # negative: BG
+              else:
+                pass
+            l2 +=1
+          l1 +=1
+
+        
+        
+        tp = len(scores[scores == 2])
+        fp = len(scores[scores == 1])
+        fn = len(scores[scores == 0])
+
+  
+        precision = tp / (tp + fp)
+        recall = tp / (tp + fn)
+  
+        precisions.append(np.round(precision, 3))
+        recalls.append(np.round(recall, 3))
+
+    return precisions, recalls
