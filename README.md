@@ -9,7 +9,6 @@ This repository consists of the following files:
 * [LICENSE](https://github.com/cfont03/Anomaly-breast-cancer-detection/blob/main/LICENSE): 
 
 And the following directories:
-* [src](https://github.com/cfont03/Anomaly-breast-cancer-detection/tree/main/src): 
-    * preprocess: preprocessing and cleansing of the raw data can be found here. 
-* train: development of the algorithms Faster R-CNN and YOLO and training of the models
-* test: test of the models with test data
+* [src](https://github.com/cfont03/Anomaly-breast-cancer-detection/tree/main/src): main source code is saved here
+    * [preprocess](https://github.com/cfont03/Anomaly-breast-cancer-detection/tree/main/src/preprocess): preprocessing and cleansing of the raw data can be found here
+* [test](https://github.com/cfont03/Anomaly-breast-cancer-detection/tree/main/test): test of the models with test data
