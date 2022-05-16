@@ -35,7 +35,7 @@ def vgg16_cnn(df, h = 800, w = 800, c = 3):
    
   vgg16 = tf.keras.applications.VGG16(
     include_top=False, 
-    weights='imagenet', # weights of imagenet
+    weights='imagenet',
     input_shape = (w, h, c)
   )
 
@@ -75,7 +75,6 @@ def vgg16_cnn(df, h = 800, w = 800, c = 3):
 
 
 
-  # add sizes of feature map in the df
   df['n_anchor'] = anchors
   df['w_fm'] = w_fms
   df['h_fm'] = h_fms 
