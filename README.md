@@ -3,7 +3,7 @@
 This open repository has been developed for the Master Thesis "Abnormality detection in mammographic images" during the summer semester 2022 at the Open University of Catalonia (UOC). 
 
 This repository consists of the following files:
-* [README.md] (cfont03/Anomaly-breast-cancer-detection/README.md): information on the contents of the repository is exposed
+[README.md] (cfont03/Anomaly-breast-cancer-detection/README.md): information on the contents of the repository is exposed
 * [requirements.txt] (cfont03/Anomaly-breast-cancer-detection/requirements.txt): required packages for the execution of the project are listed together with the corresponding versions
 
 And the following directories:
