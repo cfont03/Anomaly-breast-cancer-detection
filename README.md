@@ -2,7 +2,7 @@
 
 This open repository has been developed for the Master Thesis "Abnormality detection in mammographic images" during the summer semester 2022 at the Open University of Catalonia (UOC). The trained and tested models are the Faster R-CNN and YOLO algorithms. 
 
-To train the different models, the open database MIAS has been used. Further information can be found in the following link: https://www.repository.cam.ac.uk/handle/1810/250394
+To train the different models, the open database Mammographic Image Analysis Society (MIAS) has been used. Further information can be found in the following link: https://www.repository.cam.ac.uk/handle/1810/250394
 
 
 This repository consists of the following files:
@@ -12,6 +12,7 @@ This repository consists of the following files:
 * `LICENSE`: 
 
 And the following directories:
+* `res`: it contains the images from the MIAS database, as well as a .txt file with the corresponding coordinates of the abnormality, its radius and its class.
 * `src`: main source code is saved here
     * `preprocess`: preprocessing and cleansing of the raw data can be found here
     * `train`: training of Faster R-CNN and YOLO algorithms can be found here, together with the corresponding codes of useful functions and its algorithms.
