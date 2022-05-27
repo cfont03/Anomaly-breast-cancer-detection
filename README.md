@@ -1,4 +1,4 @@
-# Anomaly-breast-cancer-detection
+# Anomaly breast cancer detection
 
 This open repository has been developed for the Master Thesis "Abnormality detection in mammographic images" during the summer semester 2022 at the Open University of Catalonia (UOC). The trained and tested models are the Faster R-CNN and YOLO algorithms. 
 
