@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 from pathlib import Path
-
+import os
 
 def vertical_flip (info_file, display = False):
 
@@ -37,24 +37,20 @@ def vertical_flip (info_file, display = False):
                                                                                 info_file.iloc[:, 8], info_file.iloc[:, 9],
                                                                                 info_file.iloc[:, 10], info_file.iloc[:, 11]):
   
-    ### CHECKPOINT INPUT
-    if (xcoord > size_x or ycoord > size_y or xmin > xmax or ymin > ymax):
-        print("ERROR: coordinates are wrong!")
-    else:
-        pass
-    
     vflip_ = cv2.imread(str(path))
     vflip = cv2.flip(vflip_, 0)
-    new_path = Path("/content/archive/all-mias/{:}_vflip{:}".format(name, '.jpeg'))
-    status = cv2.imwrite(str(new_path), vflip)
-
-    ### CHECKPOINT OUTPUT
-    print("Image written to file-system " , new_path,  " :", status)
+    new_path = Path("res/all-mias/{:}_vflip{:}".format(name, '.jpeg'))
+    if os.path.exists(new_path) == True:
+          print(new_path, ": File already exists")
+    else:
+          status = cv2.imwrite(str(new_path), vflip)
+          ### CHECKPOINT OUTPUT
+          print("Image written to file-system " , new_path,  " :", status)
 
     ### adapt bounding boxes points
-    ycoord_ = int(size_y) - int(ycoord) # needs to be 1024 dynamic
-    ymax_ = int(size_y) - int(ymin)
-    ymin_ = int(size_y) - int(ymax)
+    ycoord_ = int(1024) - int(float(ycoord))
+    ymax_ = int(1024) - int(ymin)
+    ymin_ = int(1024) - int(ymax)
     x_y.append(np.array([[xcoord, ycoord_]]))
     x_min_max.append(np.array([[xmin, xmax]]))
     y_min_max.append(np.array([[ymin_, ymax_]]))

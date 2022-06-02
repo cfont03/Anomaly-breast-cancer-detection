@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+import os
 
 def rotate_images (info_file, display = False):
 
@@ -35,11 +35,6 @@ def rotate_images (info_file, display = False):
                                               info_file.iloc[:, 8], info_file.iloc[:, 9],
                                               info_file.iloc[:, 10], info_file.iloc[:, 11]):
     
-    ### CHECKPOINT ARGS
-    if (xmin > xmax or ymin > ymax):
-        print("ERROR: coordinates are wrong!")
-    else:
-        pass
     
     img = cv2.imread(path) 
     (h, w) = img.shape[:2]
@@ -48,7 +43,7 @@ def rotate_images (info_file, display = False):
     rotated = cv2.warpAffine(img, rot, (w, h))
     
     # rotate points accordingly
-    xy = np.array([[int(xcoord), int(ycoord)]])
+    xy = np.array([[int(float(xcoord)), int(float(ycoord))]])
     ones = np.ones(shape=(len(xy), 1))
     xy_ones = np.hstack([xy, ones])
     xy_points = rot.dot(xy_ones.T).T
@@ -69,10 +64,13 @@ def rotate_images (info_file, display = False):
     y_min_max.append(y_points)
 
 
-    new_path = '/content/archive/all-mias/{:}_rotate.jpeg'.format(name)
-    status = cv2.imwrite(str(new_path), rotated)
+    new_path = 'res/all-mias/{:}_rotate.jpeg'.format(name)
+    if os.path.exists(new_path) == True:
+          print(new_path, ": File already exists")
+    else:
+          status = cv2.imwrite(str(new_path), rotated)
+          ### CHECKPOINT OUTPUT
+          print("Image written to file-system " , new_path,  " :", status)
 
-    ### CHECKPOINT OUTPUT
-    print("Image written to file-system " , new_path,  " :", status)
 
   return x_y, x_min_max, y_min_max

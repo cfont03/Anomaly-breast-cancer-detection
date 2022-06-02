@@ -1,4 +1,4 @@
-def train_test_split(df, test = 0.3):
+def train_test_split(df, test = 0.3, path_train = 'outputs/train.csv', path_test = 'outputs/test.csv'):
 
   '''
 
@@ -16,16 +16,16 @@ def train_test_split(df, test = 0.3):
     5: y centre coord of boundary box
     6: radius
     7: image path
-    9, 10, 11, 12: coord of boundary box in xmax, xmin, ymax, ymin order
+    8, 9, 10, 11: coord of boundary box in xmin, xmax, ymin, ymax order
   
   test: % of test data of all dataframe
 
 
   '''
-
+  
   ### CHECKPOINT ARGS
   for i in df.iloc:
-      if (i[9] < i[10] or i[11] < i[12]):
+      if (i[8] > i[9] or i[10] > i[11]):
           print("ERROR: coordinates are wrong!")
       else:
           pass
@@ -39,5 +39,8 @@ def train_test_split(df, test = 0.3):
 
   train = train.iloc[:,1:]
   test = test.iloc[:,1:]
+
+  train.to_csv(path_train, sep = ",")
+  test.to_csv(path_test, sep = ",")
 
   return train, test

@@ -1,5 +1,5 @@
 import cv2
-
+import os
 
 def remove_noise (info_file):
 
@@ -26,8 +26,10 @@ def remove_noise (info_file):
   for name, path in zip(info_file.iloc[:, 0], info_file.iloc[:, 7]):
     noise_ = cv2.imread(path)
     noise = cv2.fastNlMeansDenoising(noise_,None,10,7,21)
-    new_path = '/content/archive/all-mias/{:}_noise.jpeg'.format(name)
-    status = cv2.imwrite(str(new_path), noise)
-
-    ### CHECKPOINT OUTPUT
-    print("Image written to file-system " , new_path,  " :", status)
+    new_path = 'res/all-mias/{:}_noise.jpeg'.format(name)
+    if os.path.exists(new_path) == True:
+          print(new_path, ": File already exists")
+    else:
+          status = cv2.imwrite(str(new_path), noise) 
+          ### CHECKPOINT OUTPUT
+          print("Image written to file-system " , new_path,  " :", status)

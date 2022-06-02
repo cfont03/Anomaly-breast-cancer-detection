@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+import os
 
 def generate_mask (info_file, display = False):
 
@@ -23,16 +23,14 @@ def generate_mask (info_file, display = False):
   for name, size, x_coord, y_coord, radius in zip(info_file.iloc[:, 0], info_file.iloc[:, 2], 
                                                   info_file.iloc[:, 4], info_file.iloc[:, 5], info_file.iloc[:, 6]):
    
-    ### CHECKPOIINT ARGS
-    if (x_coord > size or y_coord > size):
-      print("ERROR: coordinates are wrong!")
-    else:
-      pass
+
 
     mask = np.zeros(shape=size, dtype=np.uint8)
-    cv2.circle(mask, center = (int(x_coord), int(y_coord)), radius = radius, thickness = -1, color = (255, 255, 255))
-    new_path = '/content/archive/all-mias/{:}_mask.pgm'.format(name)
-    status = cv2.imwrite(str(new_path), mask) 
-
-    ### CHECKPOINT OUTPUT
-    print("Image written to file-system " , new_path,  " :", status)
+    cv2.circle(mask, center = (int(float(x_coord)), int(float(y_coord))), radius = int(float(radius)), thickness = -1, color = (255, 255, 255))
+    new_path = 'res/all-mias/{:}_mask.pgm'.format(name)
+    if os.path.exists(new_path) == True:
+          print(new_path, ": File already exists")
+    else:
+          status = cv2.imwrite(str(new_path), mask) 
+          ### CHECKPOINT OUTPUT
+          print("Image written to file-system " , new_path,  " :", status)

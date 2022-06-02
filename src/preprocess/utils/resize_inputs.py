@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 
-def resize_input (df, h = 800, w = 800):
+def resize_input (df, alg='', h = 800, w = 800):
   
   '''
 
@@ -21,7 +21,9 @@ def resize_input (df, h = 800, w = 800):
   5: height original image
   6: width original image
   7: label
-
+  
+  Args: name for the algorithm
+  
   Output: df with same structure as Args
 
   '''
@@ -34,24 +36,19 @@ def resize_input (df, h = 800, w = 800):
   labels = []
 
   for i in df.iloc:
-    
-    ### CHECKPOINT ARGS
-    if(i[1] > i[6] or i[2] > i[6] or i[2] > i[1]):
-        print("ERROR: x coordinates are incorrect! ")
-    elif (i[3] > i[5] or i[4] > i[5] or i[3] > i[4]):
-        print("ERROR: y coordinates are incorrect! ")
-    else:
-        pass
 
     img = cv2.imread(str(i[0]))
     img = cv2.resize(img, dsize = (h,w), interpolation = cv2.INTER_CUBIC)
     path, filename_ext = os.path.split(i[0])
     filename = os.path.basename(i[0]).split('.')[0]
-    new_path = Path(str(path)+'/{:}_resize{:}'.format(filename, '.jpeg')) 
-    status = cv2.imwrite(str(new_path), img)
-
-    ### CHECKPOINT OUTPUT
-    print("Image written to file-system " , new_path,  " :", status) 
+    new_path = Path(str(path)+'/{:}_resize{:}{:}'.format(filename, alg, '.jpeg')) 
+    if os.path.exists(new_path) == True:
+          print(new_path, ": File already exists")
+    else:
+          status = cv2.imwrite(str(new_path), img) 
+          ### CHECKPOINT OUTPUT
+          print("Image written to file-system " , new_path,  " :", status)
+  
     paths.append(new_path)
 
     x_factor = w / i[5]
