@@ -2,9 +2,7 @@ import time
 import cv2
 import numpy as np
 import tensorflow as tf
-from tensorflow import keras 
-print("Keras version   : ", keras.__version__)
-from tensorflow.keras import Model
+from keras import Model
 
 
 def vgg16_cnn(df, h = 800, w = 800, c = 3):
