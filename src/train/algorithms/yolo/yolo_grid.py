@@ -4,10 +4,10 @@ print("Keras version   : ", keras.__version__)
 
 import tensorflow as tf
 
-from tensorflow.keras.layers import (Input,
+from keras.layers import (Input, Lambda,
      Dense, Dropout, Conv2D, BatchNormalization, MaxPooling2D, LeakyReLU)
-from tensorflow.keras import Model
-import tensorflow.keras.backend as K
+from keras import Model
+import keras.backend as K
 
 
 def yolo_grid(c = 3, S = 7, C = 1, B = 1):
