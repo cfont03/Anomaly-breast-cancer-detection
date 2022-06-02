@@ -4,8 +4,8 @@ import matplotlib.pylab as plt
 from matplotlib import patches
 
 
-def boundary_box (df):
-  
+def boundary_box(df):
+      
   '''
 
   This function plots a given image with its boundary boxes.
@@ -23,7 +23,7 @@ def boundary_box (df):
   '''
 
   image = input("introduce image name: ") 
-  path = '/content/archive/all-mias/{:}'.format(image)
+  path = 'res/all-mias/{:}'.format(image)
   im = cv2.imread(path)
   
   # generate x, y, width and height
@@ -31,6 +31,12 @@ def boundary_box (df):
   xmax = df[df['image path'].apply(lambda x : x == str(Path(path)))].iloc[:,10]
   ymin = df[df['image path'].apply(lambda x : x == str(Path(path)))].iloc[:,11]
   ymax = df[df['image path'].apply(lambda x : x == str(Path(path)))].iloc[:,12]
+  
+  ### CHECKPOINT INPUT
+  if (len(xmin) == 0 or len(xmax) == 0 or len(ymin) == 0 or len(ymax) == 0):
+      print("ERROR: image is not in test dataset!")
+  else:
+      pass
   
   xmin, xmax, ymin, ymax = (xmin.values[0], xmax.values[0], ymin.values[0], ymax.values[0])
 
@@ -54,6 +60,14 @@ def boundary_box (df):
 
   plt.show()
 
+
+
+def plot_map(precisions, recalls):
+    plt.plot(precisions, recalls, linewidth=3, color="red")
+    plt.xlabel("Recall", fontsize=12, fontweight='bold')
+    plt.ylabel("Precision", fontsize=12, fontweight='bold')
+    plt.title("Precision-Recall Curve", fontsize=15, fontweight="bold")
+    plt.show()
 
 
 
