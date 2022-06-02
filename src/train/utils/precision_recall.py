@@ -1,5 +1,6 @@
 import numpy as np
 
+from train.utils.intersection_over_union import IoU_ROI
 
 def compute_precision_recall(df, thresholds):
 

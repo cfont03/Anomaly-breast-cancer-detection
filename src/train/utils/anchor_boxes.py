@@ -103,7 +103,7 @@ def anchor_boxes (df, w= 800, h = 800):
 
   # take indicated image
   image = input("introduce image name: ") 
-  img_path = '/content/archive/all-mias/{:}'.format(image)
+  img_path = 'res/all-mias/{:}'.format(image)
   img_ = cv2.imread(img_path)
 
   centre_list_r2 = df[df['image path'].apply(lambda x : x == str(Path(img_path)))].iloc[:,12]

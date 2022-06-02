@@ -41,6 +41,7 @@ def anchor_points (df, w = 800, h = 800):
       img_path = i[1]
       
       x = df[df['image path'].apply(lambda x : x == str(Path(img_path)))].iloc[:,8]
+      
       x_str = int(w / int(x.values[0]))
       y = df[df['image path'].apply(lambda x : x == str(Path(img_path)))].iloc[:,9]
       y_str = int(h / int(y.values[0]))
@@ -61,7 +62,7 @@ def anchor_points (df, w = 800, h = 800):
 
     # take indicated image
     image = input("introduce image name: ") 
-    img_path = '/content/archive/all-mias/{:}'.format(image)
+    img_path = 'res/all-mias/{:}'.format(image)
     img_ = cv2.imread(img_path)
     
     centre_list_r1 = df[df['image path'].apply(lambda x : x == str(Path(img_path)))].iloc[:,-1]
