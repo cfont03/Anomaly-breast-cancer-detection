@@ -13,7 +13,7 @@ This repository consists of the following files:
 
 And the following directories:
 * `res`: it contains the images from the original MIAS database, as well as a .txt file with the corresponding coordinates of the abnormality, its radius and its class.
-    * `all-mias`: it contains a link where the original images can be pulled from. 
+    * `all-mias`: it contains the original images obtained from the MIAS database.
 * `src`: main source code is saved here.
     * `preprocess`: preprocessing and cleansing of the raw data can be found here.
     * `train`: training of Faster R-CNN and YOLO algorithms can be found here, together with the corresponding codes of useful functions and its algorithms.
