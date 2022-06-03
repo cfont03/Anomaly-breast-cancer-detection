@@ -23,4 +23,6 @@ And the following directories:
         * `utils`: complementary functions to the algorithms.
         * `notebooks`: module, which contains the training of the models in notebooks.
 * `test`: test of the models with test data
+    * `utils`: complementary functions to run the test.
+    * `notebooks`: module, which contains the tests of the models in notebooks.
 * `outputs`: it contains the .csv output files. 
